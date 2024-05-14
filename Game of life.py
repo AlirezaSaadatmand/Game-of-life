@@ -102,8 +102,8 @@ def get():
 get()
 def draw():
     for block in blocks:
-        block.draw()
         block.next_tick()
+        block.draw()
 
 pygame.init()
 screen = pygame.display.set_mode( (WIDTH , HEIGHT) )
@@ -120,4 +120,4 @@ while True:
             exit()
     draw()
     pygame.display.update()
-    clock.tick(10)
+    clock.tick(5)
