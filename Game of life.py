@@ -33,16 +33,6 @@ class Block:
         x = self.x
         y = self.y
         
-        if x - 1 < 0:
-            x = WIDTH // UNIT + 1
-        elif x + 1 > 0:
-            x = -1
-            
-        if y - 1 < 0:
-            y = HEIGHT // UNIT + 1
-        elif y + 1 > 0:
-            y = -1
-            
         top = [x , y-1]
         buttom = [x , y+1]
         left = [x-1 , y]
@@ -51,6 +41,17 @@ class Block:
         topRight = [x+1 , y-1]
         buttomLeft = [x-1 , y+1]
         buttomRight = [x+1 , y+1]
+        
+        for side in [top , buttom , left , right , topLeft , topRight , buttomLeft , buttomRight]:
+            if side[0] == -1:
+                side[0] = WIDTH // UNIT - 1
+            elif side[0] == WIDTH // UNIT:
+                side[0] = 0
+                
+            if side[1] == -1:
+                side[1] = HEIGHT // UNIT - 1 
+            elif side[1] == HEIGHT // UNIT:
+                side[1] = 0
         
         for block in blocks:
             if [block.x , block.y] in [top , buttom , left , right , topLeft , topRight , buttomLeft , buttomRight]:
@@ -63,14 +64,15 @@ class Block:
                 count += 1
                 
                 
-        if self.color == "black" and count == 3:
-            self.color = "white"
-            return 
+        if self.color == "black":
+            if count == 3:
+                self.color = "white"
+                return 
         else:
             if count == 3 or count == 2:
                 self.color = "white"
-                return
-        self.color = "black"
+            else:
+                self.color = "black"
         
         
         
