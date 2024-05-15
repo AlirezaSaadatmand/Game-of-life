@@ -2,8 +2,6 @@ import pygame
 from sys import exit
 import random
 
-
-
 WIDTH , HEIGHT = 1000 , 600
 
 UNIT = 20
@@ -120,4 +118,4 @@ while True:
             exit()
     draw()
     pygame.display.update()
-    clock.tick(5)
+    clock.tick(10)
