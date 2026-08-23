@@ -2,7 +2,7 @@ import pygame
 from sys import exit
 import random
 
-WIDTH , HEIGHT = 1500 , 1000
+WIDTH , HEIGHT = 1600 , 800
 
 UNIT = 20
 
@@ -15,17 +15,11 @@ class Block:
         
         self.xpos = xpos
         self.ypos = ypos
-        
         self.id = id
-        
         self.color = "black"
-    
         self.neigh = []
-        
-         
         self.sur = pygame.Surface( (UNIT , UNIT) )
         self.sur_rect = self.sur.get_rect(topleft = (self.xpos , self.ypos))
-        
         
     def get_beighbors(self):
         x = self.x
@@ -61,18 +55,15 @@ class Block:
             if n.color == "white":
                 count += 1
                 
-                
         if self.color == "black":
             if count == 3:
-                self.color = "white"
-                return 
+                return "white"
         else:
             if count == 3 or count == 2:
-                self.color = "white"
+                return "white"
             else:
-                self.color = "black"
-        
-        
+                return "black"
+        return self.color
         
     def draw(self):
         self.sur.fill(self.color)
@@ -98,9 +89,13 @@ def get():
         block.get_beighbors()
 get()
 def draw():
+    lst = []
     for block in blocks:
-        block.next_tick()
-        block.draw()
+        lst.append([block, block.next_tick()])
+
+    for i in lst:
+        i[0].color = i[1]
+        i[0].draw()
 
 pygame.init()
 screen = pygame.display.set_mode( (WIDTH , HEIGHT) )
@@ -108,9 +103,7 @@ screen.fill("#f59563")
 pygame.display.set_caption("Game of life ")
 clock = pygame.time.Clock()
 
-
 while True:
-    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
