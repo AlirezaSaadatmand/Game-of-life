@@ -2,7 +2,7 @@ import pygame
 from sys import exit
 import random
 
-WIDTH , HEIGHT = 1000 , 600
+WIDTH , HEIGHT = 1500 , 1000
 
 UNIT = 20
 
@@ -80,7 +80,6 @@ class Block:
         pygame.draw.rect(screen , "black", self.sur_rect,  1, 0)
     
 def create_board():
-
     count = 1
     for i in range(0 , HEIGHT // UNIT):
         for j in range(0 , WIDTH // UNIT):
@@ -106,7 +105,7 @@ def draw():
 pygame.init()
 screen = pygame.display.set_mode( (WIDTH , HEIGHT) )
 screen.fill("#f59563")
-pygame.display.set_caption("KNIGHT PROBLEM")
+pygame.display.set_caption("Game of life ")
 clock = pygame.time.Clock()
 
 
